@@ -1,0 +1,92 @@
+/* styles3.css */
+
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #eef2f5;
+    padding: 0 10px;
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.header h1, .header h2, .header p {
+    text-align: center;
+    margin: 4px 0;
+    color: #333;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header h2 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.header p {
+    font-size: 14px;
+    color: #666;
+}
+
+main {
+    padding: 10px 0;
+}
+
+h2 {
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+}
+
+table {
+    width: 100%; /* Make the table span the full width */
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+td {
+    color: #333;
+}
+
+/* Button styles */
+button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button[onclick^="approveRequest"] {
+    background-color: #27803c; /* Green for Approve button */
+}
+
+button[onclick^="declineRequest"] {
+    background-color: #ba4954; /* Red for Decline button */
+}

@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #2d3436;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.mode-select button {
+  margin: 10px;
+  padding: 10px 20px;
+  background: #00cec9;
+  border: none;
+  border-radius: 5px;
+  color: #2d3436;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.mode-select button:hover {
+  background: #0984e3;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 5px;
+  margin: 20px auto;
+  display: none;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background: #636e72;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.cell:hover {
+  background: #b2bec3;
+}
+
+.cell.taken {
+  cursor: not-allowed;
+}
+
+.winning-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.winning-message.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.winning-message button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #55efc4;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.winning-message button:hover {
+  background: #00b894;
+}

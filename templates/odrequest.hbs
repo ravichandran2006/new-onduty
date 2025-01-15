@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OD Request Form</title>
+    <style> body { font-family: Arial, sans-serif; background-color: #cff7f7; margin: 0; padding: 0; } main { max-width: 800px; margin: 50px auto; padding: 20px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; } h1 { text-align: center; margin-bottom: 20px; } .form-group { margin-bottom: 15px; } label { display: block; font-weight: bold; margin-bottom: 5px; } input[type="text"], input[type="datetime-local"], textarea { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; } textarea { resize: vertical; } button { background-color: #4CAF50; color: white; border: none; padding: 10px 15px; font-size: 16px; cursor: pointer; border-radius: 4px; width: 100%; } button:hover { background-color: #45a049; } #response-message { text-align: center; margin-top: 20px; font-size: 18px; } .success { color: green; } .error { color: red; } </style>
+    
+</head>
+<body>
+    <main>
+        <h1>On-Duty Request Form</h1>
+        <form id="approval-request">
+            <div class="form-group">
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" name="studentName" value="{{name}}" readonly required>
+            </div>
+            <div class="form-group">
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" name="studentId" value="{{rollno}}" readonly required>
+            </div>
+            <div class="form-group">
+                <label for="class">Class (e.g., II AIML-B):</label>
+                <input type="text" id="class" name="studentClass" value="{{class}}" readonly required>
+            </div>
+            <div class="form-group">
+                <label for="event-name">Event Name:</label>
+                <input type="text" id="event-name" name="eventName" required>
+            </div>
+            <div class="form-group">
+                <label for="event-start-date">From:</label>
+                <input type="datetime-local" id="event-start-date" name="eventStartDate" required>
+            </div>
+            <div class="form-group">
+                <label for="event-end-date">To:</label>
+                <input type="datetime-local" id="event-end-date" name="eventEndDate" required>
+            </div>
+            <div class="form-group">
+                <label for="event-location">College Name:</label>
+                <input type="text" id="event-location" name="eventLocation" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message to Professor:</label>
+                <textarea id="message" name="message" rows="4" required>I hope this request finds you well</textarea>
+            </div>
+            <button type="button" id="submit-button">Send Request</button>
+        </form>
+        <div id="response-message"></div>
+    </main>
+    <script>
+        document.getElementById('submit-button').addEventListener('click', async () => {
+            const formData = new FormData(document.getElementById('approval-request'));
+            const jsonData = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/submit-od-request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                });
+
+                const messageElement = document.getElementById('response-message');
+                if (response.ok) {
+                    messageElement.innerText = "Request submitted successfully!";
+                    messageElement.className = "success";
+                } else {
+                    messageElement.innerText = "Failed to submit request. Please try again.";
+                    messageElement.className = "error";
+                }
+            } catch (error) {
+                const messageElement = document.getElementById('response-message');
+                messageElement.innerText = "Error occurred while submitting the request.";
+                messageElement.className = "error";
+            }
+        });
+    </script>
+</body>
+</html>

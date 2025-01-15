@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cff7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #87CEFA; /* Light Sky Blue */
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            color: #333; /* Dark text for contrast */
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+        .navbar a:hover {
+            background-color: #ADD8E6; /* Lighter blue on hover */
+            border-radius: 5px;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .navbar .nav-links {
+            display: flex;
+        }
+        .container {
+            background-color: white;
+            width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header h2 {
+            margin: 5px 0;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .results {
+            text-align: left;
+            margin: 20px auto;
+        }
+        .results .info {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .results .info span {
+            font-weight: bold;
+        }
+        .assigned-duties {
+            margin-top: 30px;
+        }
+        .assigned-duties button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2f59ad;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        .assigned-duties button:hover {
+            background-color: #b22c2c;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">On-Duty Manager</div>
+        <div class="nav-links">
+            <a href="/teacher_login">Home</a>
+            <a href="/home">Profile</a>
+            <a href="/view_od_requests">Notifications</a>
+            <a href="/front_page">Logout</a>
+        </div>
+    </div>
+<div class="container">
+    <div class="header">
+        <h1>KONGU ENGINEERING COLLEGE</h1>
+        <h2>(Autonomous)</h2>
+        <p>Perundurai, Erode - 638 060, Tamil Nadu, India</p>
+        <hr>
+        <!-- Display the teacher's name here -->
+        <h1>Welcome, {{name}}</h1>
+    </div>
+
+    <div class="results">
+        <p class="info"><span>Name:</span> {{name}}</p>
+        <p class="info"><span>Employee ID:</span> {{employeeId}}</p>
+        <p class="info"><span>Department:</span> {{department}}</p>
+    </div>
+
+    <div class="assigned-duties">
+        <button onclick="location.href='/previous_od'">View Pre OD Requests</button>
+        <button onclick="location.href='/event-based-request'">Event based requests</button>
+        <button onclick="location.href='/teacher-view-postonduty'">View Post OD Requests</button>
+    </div>
+
+    <div class="footer">
+        <p>&copy; Kongu Engineering College, All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>

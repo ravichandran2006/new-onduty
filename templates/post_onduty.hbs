@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post On Duty Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            background-color: #aefaf5;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 0 auto;
+        }
+        label {
+            font-size: 16px;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"], input[type="date"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .category-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .category-table th, .category-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .category-table th {
+            background-color: #f2f2f2;
+        }
+        .category-table td select {
+            width: 100%;
+            padding: 5px;
+        }
+        .total-sap {
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .remaining-sap {
+            font-size: 18px;
+            margin-top: 10px;
+            color: green;
+        }
+        .claimable-marks {
+            font-size: 18px;
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Post On Duty Form</h1>
+
+    <div class="form-container">
+        <h3>Apply for Post On Duty</h3>
+
+        <form id="postOnDutyForm" action="/submit-post-onduty" method="POST" enctype="multipart/form-data">
+            <label for="postStudentName">Student Name:</label>
+            <input type="text" id="postStudentName" name="studentName" required>
+
+            <label for="postStudentId">Student Roll Number:</label>
+            <input type="text" id="postStudentId" name="studentId" required>
+
+            <label for="postEventName">Event Name:</label>
+            <input type="text" id="postEventName" name="eventName" required>
+
+            <label for="postCollegeName">College Name:</label>
+            <input type="text" id="postCollegeName" name="collegeName" required>
+
+            <label for="postDate">Date:</label>
+            <input type="date" id="postDate" name="date" required>
+
+            <label for="postCertificate">Upload Certificate (Photo):</label>
+            <input type="file" id="postCertificate" name="certificate" accept=".jpg,.jpeg,.png" required>
+
+            <h3>Participation Categories</h3>
+            <table class="category-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Inside</th>
+                        <th>Outside</th>
+                        <th>Premier/state</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paper Presentation</td>
+                        <td><select id="paperInside" onchange="calculateSAP()"><option value="0">None</option><option value="20">Winner</option><option value="10">Participate</option></select></td>
+                        <td><select id="paperOutside" onchange="calculateSAP()"><option value="0">None</option><option value="30">Winner</option><option value="20">Participate</option></select></td>
+                        <td><select id="paperPremier" onchange="calculateSAP()"><option value="0">None</option><option value="50">Winner</option><option value="30">Participate</option></select></td>
+                    </tr>
+                    <tr>
+                        <td>Project Presentation</td>
+                        <td><select id="projectInside" onchange="calculateSAP()"><option value="0">None</option><option value="20">Winner</option><option value="10">Participate</option></select></td>
+                        <td><select id="projectOutside" onchange="calculateSAP()"><option value="0">None</option><option value="30">Winner</option><option value="20">Participate</option></select></td>
+                        <td><select id="projectPremier" onchange="calculateSAP()"><option value="0">None</option><option value="50">Winner</option><option value="30">Participate</option></select></td>
+                    </tr>
+                    <tr>
+                        <td>Sports</td>
+                        <td><select id="sportsInside" onchange="calculateSAP()"><option value="0">None</option><option value="20">Winner</option><option value="10">Participate</option></select></td>
+                        <td><select id="sportsOutside" onchange="calculateSAP()"><option value="0">None</option><option value="30">Winner</option><option value="20">Participate</option></select></td>
+                        <td><select id="sportsPremier" onchange="calculateSAP()"><option value="0">None</option><option value="50">Winner</option><option value="30">Participate</option></select></td>
+                    </tr>
+                    <tr>
+                        <td>Techno-Managerial Events</td>
+                        <td><select id="technoInside" onchange="calculateSAP()"><option value="0">None</option><option value="10">Winner</option><option value="2">Participate</option></select></td>
+                        <td><select id="technoOutside" onchange="calculateSAP()"><option value="0">None</option><option value="20">Winner</option><option value="5">Participate</option></select></td>
+                        <td><select id="technoPremier" onchange="calculateSAP()"><option value="0">None</option><option value="30">Winner</option><option value="10">Participate</option></select></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="total-sap">
+                <span>Total SAP: </span><span id="totalSAP">0</span>
+            </div>
+
+            <div class="remaining-sap" id="remainingSAP"></div>
+            <div class="claimable-marks" id="claimableMarks"></div>
+            <input type="hidden" name="totalSAP" id="totalSAPInput" value="0">
+            <input type="hidden" name="remainingSAP" id="remainingSAPInput" value="0">
+            <input type="submit" value="Submit Post On Duty">
+        </form>
+
+       <div style="text-align: center; margin-top: 20px;">
+            <a href="/front_page" style="
+                text-decoration: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #3498db;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                display: inline-block;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            " onmouseover="this.style.backgroundColor='#2980b9'" 
+               onmouseout="this.style.backgroundColor='#3498db'">
+                Home
+            </a>
+        </div>
+
+    </div>
+    <script>
+        function calculateSAP() {
+            let totalSAP = 0;
+
+            totalSAP += parseInt(document.getElementById("paperInside").value);
+            totalSAP += parseInt(document.getElementById("paperOutside").value);
+            totalSAP += parseInt(document.getElementById("paperPremier").value);
+
+            totalSAP += parseInt(document.getElementById("projectInside").value);
+            totalSAP += parseInt(document.getElementById("projectOutside").value);
+            totalSAP += parseInt(document.getElementById("projectPremier").value);
+
+            totalSAP += parseInt(document.getElementById("sportsInside").value);
+            totalSAP += parseInt(document.getElementById("sportsOutside").value);
+            totalSAP += parseInt(document.getElementById("sportsPremier").value);
+
+            totalSAP += parseInt(document.getElementById("technoInside").value);
+            totalSAP += parseInt(document.getElementById("technoOutside").value);
+            totalSAP += parseInt(document.getElementById("technoPremier").value);
+
+            document.getElementById("totalSAP").textContent = totalSAP;
+            document.getElementById("totalSAPInput").value = totalSAP;
+            if (totalSAP < 80) {
+                const remainingSAP = 80 - totalSAP;
+                document.getElementById("remainingSAP").textContent = "Remaining SAP: " + remainingSAP;
+                document.getElementById("claimableMarks").textContent = "";
+                 document.getElementById("remainingSAPInput").value = remainingSAP;
+            } else {
+                document.getElementById("remainingSAP").textContent = "";
+                document.getElementById("claimableMarks").textContent = "Claimable Marks: 3";
+                document.getElementById("remainingSAPInput").value = 0;
+            }
+        }
+    </script>
+</body>
+</html>

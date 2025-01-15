@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previously Applied OD Requests</title>
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #cff7f7;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2C3E50;
+        }
+
+        /* Table styling */
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #eaf6ff; /* Light blue background */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #1f78d1; /* Light blue color for headers */
+            color: white;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        /* Row hover effect */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Previously Applied OD Requests</h1>
+
+    <div class="table-container">
+        <table id="odRequestTable">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Location</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="odRequestsBody">
+                {{#if errorMessage}}
+                    <p style="color: red;">{{errorMessage}}</p>
+                {{/if}}
+
+                {{#if requests.length}}
+                    {{#each requests}}
+                        <tr>
+                            <td>{{this.eventName}}</td>
+                            <td>{{this.eventLocation}}</td>
+                            <td>{{formatDate this.eventStartDate}}</td>
+                            <td>{{formatDate this.eventEndDate}}</td>
+                            <td>{{this.message}}</td>
+                            <td>{{this.status}}</td>
+                        </tr>
+                    {{/each}}
+                {{else}}
+                    <p>No OD requests found.</p>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Optional script for filtering, if necessary
+        document.addEventListener("DOMContentLoaded", function() {
+            const filterByStatus = (status) => {
+                const rows = document.querySelectorAll("tr");
+                rows.forEach(row => {
+                    const statusCell = row.cells[5]; // Assuming Status is in the 6th column
+                    if (statusCell && statusCell.innerText !== status && status !== "All") {
+                        row.style.display = "none";
+                    } else {
+                        row.style.display = "";
+                    }
+                });
+            };
+
+            // Filter by status buttons
+            const filterButtons = document.createElement("div");
+            filterButtons.innerHTML = `
+                <button onclick="filterByStatus('All')">All</button>
+                <button onclick="filterByStatus('Approved')">Approved</button>
+                <button onclick="filterByStatus('Pending')">Pending</button>
+            `;
+            document.body.insertBefore(filterButtons, document.getElementById("odRequestTable"));
+        });
+    </script>
+</body>
+</html>

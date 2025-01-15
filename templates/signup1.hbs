@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #cff7f7;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #2f59ad;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #b22c2c;
+        }
+
+        .login-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #b22c2c;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: red;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Teacher Signup</h2>
+         <!-- Display error message if exists -->
+        {{#if error}}
+            <div class="error-message">{{error}}</div>
+        {{/if}}
+    
+        <form action="/signup1" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="employeeId" placeholder="Employee ID" required>
+            <input type="text" name="department" placeholder="Department" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Sign Up">
+        </form>
+        <a href="/teacher_login" class="login-link">Already have an account? Log In</a>
+    </div>
+</body>
+</html>
